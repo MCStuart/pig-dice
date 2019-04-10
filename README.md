@@ -20,7 +20,10 @@ _This application will allow multiple users to compete for the highest score usi
 |Behavior|Input|Output|
 |-|-|-|
 |User clicks a button and returns random number between 1-6|*click*|[1,6]|
-|Turn total for user is updated with current dice roll value|||
+|Turn total for user is updated with current dice roll value|9 + 4|13|
+|If 1 is rolled reset turn total to 0|13, 1|0|
+|User clicks "hold" button to sum values of turn totals| total=0, turnTotal =13| total=13, turnTotal=0|
+
 
 
 ## Known Bugs
