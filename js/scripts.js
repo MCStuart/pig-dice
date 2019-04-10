@@ -16,10 +16,21 @@ function PlayerInGame(name, total, turnTotal) {
   this.turnTotal = turnTotal
 }
 
+// Add roll value to current turn rollTotal
+
+var turnTotal = 0;
+function sumDice(roll) {
+  turnTotal += roll;
+  // var turnTotal = turnTotal + roll;
+  return turnTotal;
+}
+
+
 // User Interface Logic
 $(document).ready(function() {
   $("button#roll").click(function() {
-    var rollTotal = diceRoll();
-    console.log(rollTotal);
+    var roll = diceRoll();
+    var turn = sumDice(roll);
+    console.log(roll, turn);
   });
 });
