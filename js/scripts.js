@@ -18,19 +18,24 @@ function PlayerInGame(name, total, turnTotal) {
 
 // Add roll value to current turn rollTotal
 
-var turnTotal = 0;
-function sumDice(roll) {
-  turnTotal += roll;
-  // var turnTotal = turnTotal + roll;
-  return turnTotal;
-}
+var turn = 0;
+
+// something goes here
+function ifOneIsRolled(roll) {
+  if (roll === 1) {
+    return turn = 0;
+  } else {
+    turn += roll;
+    return turn;
+  }
+};
 
 
 // User Interface Logic
 $(document).ready(function() {
   $("button#roll").click(function() {
     var roll = diceRoll();
-    var turn = sumDice(roll);
-    console.log(roll, turn);
+    var turnTotal = ifOneIsRolled(roll);
+    console.log(roll, turnTotal);
   });
 });
