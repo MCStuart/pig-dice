@@ -16,8 +16,9 @@ function PlayerInGame(name) {
 };
 
 // funtion to sum rolls per turn resetting if one is rolled
-var turn = 0;
+
 function rollSumTotalIfNotOne(roll) {
+  var turn = 0;
   if (roll === 1) {
     return turn = 0;
   } else {
@@ -51,7 +52,7 @@ Game.prototype.findPlayer = function(name) {
 // function to sum total and turn total
 PlayerInGame.prototype.turnToFinalTotal = function(turnTotals) {
   this.total += turnTotals;
-  console.log(this.total);
+
 };
 
 // User Interface Logic
@@ -77,13 +78,17 @@ $(document).ready(function() {
     console.log(playerInGame);
     console.log(player1, player2);
   });
+
   $("button#roll").click(function() {
-    var roll = diceRoll();
     turnTotal = rollSumTotalIfNotOne(roll);
     console.log(roll, turnTotal);
+    var roll = diceRoll();
   });
+
   $("button#hold").click(function() {
-    console.log(playerInGame)
     playerInGame.turnToFinalTotal(turnTotal);
+    turnTotal = 0;
+    console.log(playerInGame);
   });
+
 });
