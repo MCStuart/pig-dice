@@ -45,18 +45,12 @@ PlayerInGame.prototype.endTurn = function () {
   this.roll = 0;
 };
 
-// Assigns each new player a unique Id
-Game.prototype.assignId = function() {
-  this.currentId += 1;
-  return this.currentId;
-};
+
 
 // Adds new players to the Game
 Game.prototype.addPlayer = function(playerInGame) {
-  playerInGame.id = this.assignId();
   this.players.push(playerInGame);
 };
-
 
 // User Interface Logic
 $(document).ready(function() {
@@ -71,27 +65,31 @@ $(document).ready(function() {
   $("form.playerField").submit(function(event) {
     event.preventDefault();
     var player1 = $("input#playerName1").val();
-    playerInGame = new PlayerInGame(player1);
-    game.addPlayer(playerInGame);
+    var player2 = $("input#playerName2").val();
+    player1 = new PlayerInGame(player1);
+    game.addPlayer(player1);
+    player2 = new PlayerInGame(player2);
+    game.addPlayer(player2);
     console.log(game);
+    console.log(game.currentId);
+    console.log(game.players[0]);
     $("button#newGame").hide();
     $("form.playerField").hide();
     $("div.dieDisplay").show();
-    console.log(playerInGame);
-    console.log(player1);
   });
-
   $("button#roll").click(function() {
-    playerInGame.rollValue();
-    playerInGame.rollSumTotalIfNotOne();
-    playerInGame.winCondition();
-    console.log(playerInGame.roll);
-    console.log(playerInGame.turnTotal);
+    game.players[game.currentId].rollValue();
+    game.players[game.currentId].rollSumTotalIfNotOne();
+    game.players[game.currentId].winCondition();
+    //console.log(playerInGame.roll, playerInGame.turnTotal);
+    console.log(game.players[game.currentId]);
   });
-
   $("button#hold").click(function() {
-    playerInGame.endTurn();
-    console.log(playerInGame);
+    game.players[game.currentId].endTurn();
+    console.log(game);
+    game.currentId++;
+    if (game.currentId >= game.players.length) {
+      game.currentId = 0;
+    }
   });
-
 });
