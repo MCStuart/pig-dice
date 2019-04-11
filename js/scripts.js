@@ -76,6 +76,7 @@ $(document).ready(function() {
     $("button#newGame").hide();
     $("form.playerField").hide();
     $("div.dieDisplay").show();
+    $(".nameOfCurrentPlayer").html(game.players[game.currentId].name);
   });
   $("button#roll").click(function() {
     game.players[game.currentId].rollValue();
@@ -91,5 +92,6 @@ $(document).ready(function() {
     if (game.currentId >= game.players.length) {
       game.currentId = 0;
     }
+    $(".nameOfCurrentPlayer").html(game.players[game.currentId].name);
   });
 });
