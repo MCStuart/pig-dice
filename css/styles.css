@@ -5,3 +5,13 @@
 form.playerField {
   display: none;
 }
+
+.playerInfo {
+  float: right;
+  padding: 20px;
+  border: 2px solid green;
+}
+
+/* * {
+  border: 1px solid red;
+} */

@@ -66,10 +66,10 @@ $(document).ready(function() {
     event.preventDefault();
     var player1 = $("input#playerName1").val();
     var player2 = $("input#playerName2").val();
-    player1 = new PlayerInGame(player1);
-    game.addPlayer(player1);
     player2 = new PlayerInGame(player2);
     game.addPlayer(player2);
+    player1 = new PlayerInGame(player1);
+    game.addPlayer(player1);
     console.log(game);
     console.log(game.currentId);
     console.log(game.players[0]);
