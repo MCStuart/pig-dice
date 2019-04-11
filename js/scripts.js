@@ -31,10 +31,18 @@ PlayerInGame.prototype.rollSumTotalIfNotOne = function() {
   }
 };
 
+// Set win condition for roll+turn total+final total over 100
 PlayerInGame.prototype.winCondition = function () {
   if ((this.roll + this.turnTotal + this.finalTotal) >= 100) {
     alert("Congratulations, " + this.name + "! You won!");
   } else {};
+};
+
+//Hold function
+PlayerInGame.prototype.endTurn = function () {
+  this.finalTotal += this.turnTotal;
+  this.turnTotal = 0;
+  this.roll = 0;
 };
 
 // Assigns each new player a unique Id
@@ -82,7 +90,8 @@ $(document).ready(function() {
   });
 
   $("button#hold").click(function() {
-
+    playerInGame.endTurn();
+    console.log(playerInGame);
   });
 
 });
