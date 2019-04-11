@@ -82,8 +82,10 @@ $(document).ready(function() {
     game.players[game.currentId].rollValue();
     game.players[game.currentId].rollSumTotalIfNotOne();
     game.players[game.currentId].winCondition();
-    //console.log(playerInGame.roll, playerInGame.turnTotal);
     console.log(game.players[game.currentId]);
+    $("#riceDoll").html(game.players[game.currentId].roll);
+    $("#turnTotal").html(game.players[game.currentId].turnTotal);
+    $("#previousScores").html(game.players[game.currentId].finalTotal);
   });
   $("button#hold").click(function() {
     game.players[game.currentId].endTurn();
@@ -93,5 +95,8 @@ $(document).ready(function() {
       game.currentId = 0;
     }
     $(".nameOfCurrentPlayer").html(game.players[game.currentId].name);
+    $("#riceDoll").html(0);
+    $("#turnTotal").html(0);
+    $("#previousScores").html(game.players[game.currentId].finalTotal);
   });
 });
