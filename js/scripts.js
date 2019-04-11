@@ -12,19 +12,29 @@ function Game() {
 // Adds a player to the game
 function PlayerInGame(name) {
   this.name = name,
-  this.total = 0
+  this.roll = 0,
+  this.turnTotal = 0,
+  this.finalTotal = 0
 };
 
-// funtion to sum rolls per turn resetting if one is rolled
+PlayerInGame.prototype.rollValue = function() {
+  this.roll = diceRoll();
+}
 
-function rollSumTotalIfNotOne(roll) {
-  var turn = 0;
-  if (roll === 1) {
-    return turn = 0;
+// funtion to sum rolls per turn resetting if one is rolled
+PlayerInGame.prototype.rollSumTotalIfNotOne = function() {
+  if (this.roll === 1) {
+    this.roll = 0;
+    this.turnTotal = 0;
   } else {
-    turn += roll;
-    return turn;
+    this.turnTotal += this.roll;
   }
+};
+
+PlayerInGame.prototype.winCondition = function () {
+  if ((this.roll + this.turnTotal + this.finalTotal) >= 100) {
+    alert("Congratulations, " + this.name + "! You won!");
+  } else {};
 };
 
 // Assigns each new player a unique Id
@@ -39,21 +49,6 @@ Game.prototype.addPlayer = function(playerInGame) {
   this.players.push(playerInGame);
 };
 
-// Finds player is array and adds turn total to player total
-Game.prototype.findPlayer = function(name) {
-  for (var i=0; i< this.players.length; i++) {
-      if (this.players[i].name == name) {
-        return this.players[i];
-      }
-    };
-  return false;
-}
-
-// function to sum total and turn total
-PlayerInGame.prototype.turnToFinalTotal = function(turnTotals) {
-  this.total += turnTotals;
-
-};
 
 // User Interface Logic
 $(document).ready(function() {
@@ -68,7 +63,6 @@ $(document).ready(function() {
   $("form.playerField").submit(function(event) {
     event.preventDefault();
     var player1 = $("input#playerName1").val();
-    var player2 = $("input#playerName2").val();
     playerInGame = new PlayerInGame(player1);
     game.addPlayer(playerInGame);
     console.log(game);
@@ -76,19 +70,19 @@ $(document).ready(function() {
     $("form.playerField").hide();
     $("div.dieDisplay").show();
     console.log(playerInGame);
-    console.log(player1, player2);
+    console.log(player1);
   });
 
   $("button#roll").click(function() {
-    turnTotal = rollSumTotalIfNotOne(roll);
-    console.log(roll, turnTotal);
-    var roll = diceRoll();
+    playerInGame.rollValue();
+    playerInGame.rollSumTotalIfNotOne();
+    playerInGame.winCondition();
+    console.log(playerInGame.roll);
+    console.log(playerInGame.turnTotal);
   });
 
   $("button#hold").click(function() {
-    playerInGame.turnToFinalTotal(turnTotal);
-    turnTotal = 0;
-    console.log(playerInGame);
+
   });
 
 });
